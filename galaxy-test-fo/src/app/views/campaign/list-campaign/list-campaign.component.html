@@ -1,0 +1,333 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      {{ "CAMPAIGN.LIST.TITLE" | translate }}
+      <div class="card-header-actions" style="height: 21px">
+        <button
+          type="button"
+          class="btn btn-block btn-outline-success"
+          style="margin-top: -7px"
+          (click)="onCreateNew()"
+        >
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p-table
+        #dataTable
+        [value]="data?.content"
+        dataKey="id"
+        styleClass="p-datatable-responsive"
+        [rows]="data?.itemsPerPage"
+        [paginator]="true"
+        stateStorage="local"
+        stateKey="stateCampaignDataTable"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [pageLinks]="data?.totalPages"
+        [totalRecords]="data?.totalItems"
+        [lazy]="true"
+        (onLazyLoad)="list($event)"
+        [loading]="!data"
+        [columns]="cols"
+        [currentPageReportTemplate]="'CAMPAIGN.LIST.REPORT' | translate"
+        [showCurrentPageReport]="true"
+        [rowHover]="true"
+        rowExpandMode="single"
+      >
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th class="campaign" style="width: 3rem"></th>
+            <th class="campaign" *ngFor="let col of columns">
+              {{ col.header | translate }}
+              <input
+                pInputText
+                type="text"
+                (input)="dataTable.filter($event.target.value, col.field)"
+                [value]="dataTable.filters[col.field]?.value"
+                [placeholder]="'Search by ' + col.field"
+                class="p-column-filter form-control form-control-sm"
+              />
+            </th>
+            <th class="campaign">
+              <div class="row mt-3">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-warning"
+                    (click)="
+                      dataTable.filters = {}; dataTable.clearState(); list()
+                    "
+                  >
+                    <i class="fa fa-filter"></i>
+                  </button>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template
+          pTemplate="body"
+          let-campaign
+          let-columns="columns"
+          let-i="dataIndex"
+          let-expanded="expanded"
+        >
+          <tr [pSelectableRow]="campaign">
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [pRowToggler]="campaign"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="
+                  expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-right'
+                "
+              ></button>
+            </td>
+            <td *ngFor="let col of columns">
+              <span
+                *ngIf="col.style == 'badge'; else notBadge"
+                [class]="campaign[col.field] + '-badge item-badge'"
+                >{{
+                  col.field == "campaignStatus"
+                    ? (CampaignStatus2Label[campaign[col.field]] | translate)
+                    : (CampaignType2Label[campaign[col.field]] | translate)
+                }}</span
+              >
+              <ng-template #notBadge>
+                {{
+                  col.hasConfiguration
+                    ? selectConfiguration(campaign.configurationMLS)[col.field]
+                    : campaign[col.field]
+                }}
+              </ng-template>
+            </td>
+            <td>
+              <div class="row mt-3">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-info"
+                    (click)="onEdit(i, campaign)"
+                  >
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </div>
+
+                <div class="col-6 col-sm-4 col-md-4 col-xl mb-4 mb-xl-0">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-primary"
+                    (click)="onDuplicate(i, campaign)"
+                  >
+                    <i class="fa fa-copy"></i>
+                  </button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <ng-template #popDelete>
+                    <button
+                      type="button"
+                      class="btn btn-block btn-sm btn-danger"
+                      (click)="delete(campaign.id)"
+                    >
+                      {{ "CAMPAIGN.LIST.DELETE" | translate }}
+                    </button>
+                  </ng-template>
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-danger"
+                    [popover]="popDelete"
+                    popoverTitle="{{
+                      'CAMPAIGNML.LIST.DELETEPOPUP' | translate
+                    }}"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-campaign>
+          <tr>
+            <td colspan="7">
+              <div class="p-p-3">
+                <p-table
+                  [value]="campaign.scenarioList"
+                  dataKey="id"
+                  #dataTable
+                  styleClass="p-datatable-responsive"
+                  stateStorage="local"
+                  stateKey="stateCampaignDataTable"
+                  [lazy]="true"
+                  [loading]="!data"
+                  [rowHover]="true"
+                  rowExpandMode="single"
+                >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="scenario" style="width: 3rem"></th>
+                      <th class="scenario">
+                        {{ "SCENARIO.LIST.COLS.CODE" | translate }} <p-sortIcon field="code"></p-sortIcon>
+                      </th>
+                      <th class="scenario">
+                        {{ "SCENARIO.LIST.COLS.TYPE" | translate }} <p-sortIcon field="customer"></p-sortIcon>
+                      </th>
+                      <th class="scenario">
+                        {{ "SCENARIO.LIST.COLS.STATUS" | translate }} <p-sortIcon field="date"></p-sortIcon>
+                      </th>
+                      <th class="scenario">
+                        Date <p-sortIcon field="amount"></p-sortIcon>
+                      </th>
+                      <th class="scenario"> {{ "SCENARIO.LIST.COLS.CREATOR" | translate }}</th>
+                      <th class="scenario"> {{ "SCENARIO.LIST.COLS.REFERENCE" | translate }}</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template
+                    pTemplate="body"
+                    let-scenario
+                    let-expandedScenario="expanded"
+                  >
+                    <tr>
+                      <td>
+                        <button
+                          type="button"
+                          (click) = "clickChevron();getScenarioTestByScenarioId(scenario.id);"
+                          pButton
+                          pRipple
+                          [pRowToggler]="scenario"
+                          class="p-button-text p-button-rounded p-button-plain"
+                          [icon]="
+                          chevron
+                              ? 'fas fa-chevron-down'
+                              : 'fas fa-chevron-right'
+                          "
+                        ></button>
+                      </td>
+                      <td>{{ scenario.code }}</td>
+                      <td>
+                        <span
+                          [class]="campaign.campaignType + '-badge item-badge'"
+                          >{{
+                            ScenarioType2Label[scenario.scenarioType]
+                              | translate
+                          }}</span
+                        >
+                      </td>
+                      <td>
+                        <span
+                          [class]="
+                            campaign.campaignStatus + '-badge item-badge'
+                          "
+                          >{{
+                            ScenarioStatus2Label[scenario.scenarioStatus]
+                              | translate
+                          }}</span
+                        >
+                      </td>
+
+                      <td>{{ scenario.creationDate | date:'yyyy-MM-dd' }}</td>
+                      <td>{{ scenario.createdBy.user.fullName }}</td>
+                      <td>{{ scenario.createdBy.user.reference }}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="6">
+                        There are no scenario for this product yet.
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="rowexpansion" let-scenario>
+                    <tr>
+                      <td colspan="7">
+                        <div class="p-p-3">
+                          <p-table [value]="test" dataKey="id">
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th class="test" style="width: 3rem"></th>
+                                <th class="test">
+                                  {{ "TEST.LIST.COLS.CODE" | translate }} <p-sortIcon field="code"></p-sortIcon>
+                                </th>
+                                <th class="test">
+                                  {{ "TEST.LIST.COLS.TYPE" | translate }} <p-sortIcon field="date"></p-sortIcon>
+                                </th>
+                                <th class="test">
+                                  {{ "TEST.LIST.COLS.STATUS" | translate }}
+                                  <p-sortIcon field="customer"></p-sortIcon>
+                                </th>
+                                <th class="test">
+                                  {{ "TEST.LIST.COLS.DATE" | translate }} <p-sortIcon field="amount"></p-sortIcon>
+                                </th>
+                                <th class="test"> {{ "TEST.LIST.COLS.CREATOR" | translate }}</th>
+                                <th class="test"> {{ "TEST.LIST.COLS.REFERENCE" | translate }}</th>
+                              </tr>
+                            </ng-template>
+                            <ng-template
+                              pTemplate="body"
+                              let-test
+                              let-expanded="expanded"
+                            >
+                              <tr>
+                                <td></td>
+                                <td>{{ test.test.code }}</td>
+                                <td>
+                                  <span
+                                    [class]="
+                                      campaign.campaignType +
+                                      '-badge item-badge'
+                                    "
+                                    >{{
+                                      Test_type_2Label[test.test.type] | translate
+                                    }}</span
+                                  >
+                                </td>
+                                <td>
+                                  <span
+                                  [class]="
+                                  test.test.status + '-badge item-badge'
+                                "
+                                    >{{
+                                      Test_status_2Label[test.test.status]
+                                        | translate
+                                    }}</span
+                                  >
+                                </td>
+                                <td>
+                                  {{ test.test.creationDate | date:'yyyy-MM-dd'  }}
+                                </td>
+                                <td>{{ test.test.code }}</td>
+                                <td>{{ test.test.code}}</td>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                              <tr>
+                                <td colspan="6">
+                                  There are no test for this product yet.
+                                </td>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                              <tr>
+                                <td colspan="6">
+                                  {{ "CAMPAIGN.LIST.EMPTY" | translate }}
+                                </td>
+                              </tr>
+                            </ng-template>
+                          </p-table>
+                        </div>
+                      </td>
+                    </tr></ng-template
+                  ></p-table
+                >
+              </div>
+            </td>
+          </tr></ng-template
+        ></p-table
+      >
+    </div>
+  </div>
+</div>

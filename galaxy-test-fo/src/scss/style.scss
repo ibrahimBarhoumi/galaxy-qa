@@ -1,0 +1,29 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+
+th.scenario {
+    background-color: #cdf3ff  !important;
+  }
+
+  
+th.test {
+    background-color: #eccfff !important;
+  }
+tr{
+      min-width: 100% !important;
+  }
+
+  .ng-select .ng-select-container {
+    font-size: small;
+  }
+  
+  .ng-select.ng-select-single .ng-select-container {
+    height: 25px;
+  }

@@ -1,0 +1,162 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ copy?.id ? "Edit" : "Add" }} test</h4>
+  <button
+    type="button"
+    class="close"
+    (click)="bsModalRef.hide()"
+    aria-label="Close"
+  >
+    <span aria-hidden="true"><i class="fa fa-times"></i></span>
+  </button>
+</div>
+<div class="modal-body">
+  <form
+    action=""
+    method="post"
+    enctype="multipart/form-data"
+    class="form-horizontal"
+    [formGroup]="testForm"
+  >
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="selectCode"
+        >Application</label
+      >
+      <div class="col-md-8">
+        <ng-select
+          [items]="dataBufferApplications"
+          [virtualScroll]="true"
+          [loading]="loadingApplications"
+          bindLabel="code"
+          placeholder="Select application"
+          (scroll)="loadApplications($event)"
+          formControlName="application"
+          [hideSelected]="true"
+          [typeahead]="searchApplicationInput"
+          (change)="changeApplication($event)"
+          [readonly]="test?.id"
+        >
+          <ng-template ng-option-tmp let-item="item">
+            {{ item.code }}
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="selectCode"
+        >Versions</label
+      >
+      <div class="col-md-8">
+        <ng-select
+          [items]="dataBufferVersions"
+          [virtualScroll]="true"
+          [loading]="loadingVersions"
+          bindLabel="applicationVersion.code"
+          placeholder="Select version"
+          (scroll)="loadVersions($event)"
+          formControlName="testVersions"
+          [hideSelected]="true"
+          [typeahead]="searchVersionInput"
+          [readonly]="!testForm.value.application"
+          [multiple] = true
+        >
+          <ng-template ng-option-tmp let-item="item">
+            {{ item.applicationVersion.code }}
+          </ng-template>
+        </ng-select>
+        <span
+        style="color: red"
+        *ngIf="testForm.controls['testVersions'].errors?.error"
+        >Error: {{ testForm.controls["testVersions"].errors?.error }} <br
+      /></span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="text-input">{{
+        "TEST.LIST.COLS.CODE" | translate
+      }}</label>
+
+      <div class="col-md-8">
+        <input
+          type="text"
+          id="code-input"
+          name="code-input"
+          class="form-control"
+          formControlName="code"
+        />
+        <span
+          style="color: red"
+          *ngIf="testForm.controls['code'].errors?.error"
+          >Error: {{ testForm.controls["code"].errors?.error }} <br
+        /></span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="selectType">Type</label>
+      <div class="col-md-8">
+        <select id="selectType" name="selectType" class="form-control"
+        formControlName="type">
+          <option *ngFor="let testType of testTypeList" [value]="testType">
+            {{ Test_type_2Label[testType] | translate}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="selectStatus">Status</label>
+      <div class="col-md-8">
+        <select id="selectStatus" name="selectStatus" class="form-control"
+        formControlName="status">
+          <option *ngFor="let testStatus of testStatusList" [value]="testStatus">
+            {{ Test_status_2Label[testStatus] | translate}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="form-group row" formArrayName="configurationMLS">
+      <label class="col-md-4 col-form-label" for="text-input">{{
+        "TEST.LIST.COLS.LABEL" | translate
+      }}</label>
+
+      <div class="col-md-8" [formGroupName]="0">
+        <input
+          type="text"
+          id="label-input"
+          name="label-input"
+          class="form-control"
+          formControlName="label"
+        />
+      </div>
+    </div>
+    <div class="form-group row" formArrayName="configurationMLS">
+      <label class="col-md-4 col-form-label" for="textarea-input">{{
+        "TEST.LIST.COLS.COMMENT" | translate
+      }}</label>
+      <div class="col-md-8" [formGroupName]="0">
+        <textarea
+          id="comment-input"
+          name="comment-input"
+          rows="3"
+          class="form-control"
+          formControlName="comment"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+    Close
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="onSubmitTest(testForm)"
+    [disabled]="testForm.invalid"
+  >
+    Save
+  </button>
+</div>

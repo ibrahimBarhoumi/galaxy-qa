@@ -1,0 +1,90 @@
+logging:
+  level:
+    ROOT: INFO
+    org.zalando.logbook: TRACE
+
+elasticsearch:
+  uri: lovotech.org:10102
+spring:
+  security:
+    enabled: false
+    swagger:
+        username: swagger
+        password: password
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: https://keycloak2.lovotech.org/auth/realms/GALAXY-QA
+        registration:
+          oidc:
+            client-id: GXQA
+            client-secret: c8d7cdce-d0d0-45b5-86c8-5fc80c921a1b
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: true
+  data:
+    mongodb:
+      uri: mongodb://root:Mongo2351#$%40@MongoDB
+      database: galaxyQAService
+    elasticsearch:
+      rest:
+        uris: http://lovotech.org:10102
+  application:
+    name: gxqa-bo
+
+server:
+  port: 8082
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  metrics:
+    logs: # Reports metrics in the logs
+      enabled: false
+      report-frequency: 60 # in seconds
+  logging:
+    use-json-format: false # By default, logs are not in Json format
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+      enabled: false
+      host: localhost
+      port: 5000
+      queue-size: 512
+
+logbook:
+  exclude:
+    - /management/health
+    - /management/info
+    - /actuator/health
+  filter.enabled: true
+  format.style: json
+  strategy: body-only-if-status-at-least
+  minimum-status: 200
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
+    parameters:
+      - access_token
+      - password
+    write:
+      chunk-size: 1000
+internal:
+  file:
+    endpoint:
+      url: http://localhost:8082/api
+service:
+  external:
+    gxqa:
+      file:
+        baseUrl: http://localhost:8082/api

@@ -1,0 +1,108 @@
+:host ::ng-deep {
+  .pi-angle-right::before {
+    content: "\f105";
+  }
+
+  .pi-angle-double-right::before {
+    content: "\f101";
+  }
+
+  .pi-angle-left::before {
+    content: "\f104";
+  }
+
+  .pi-angle-double-left::before {
+    content: "\f100";
+  }
+
+  .pi-chevron-down::before {
+    content: "\f078";
+  }
+
+  .pi {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+}
+
+.TNR-badge {
+  background: #cdf3ff;
+  color: #37c1c6;
+}
+
+.TEST-badge {
+  background: #feedaf;
+  color: #8a5340;
+}
+
+.ACTIVATED-badge {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.BLOCKED-badge {
+  background: #ffcdd2;
+  color: #c63737;
+}
+
+.SUCCESS-badge {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.FAIL-badge {
+  background: #ffcdd2;
+  color: #c63737;
+}
+
+.SKIP-badge {
+  background: #cdf3ff;
+  color: #37c1c6;
+}
+
+.CONTROLFAIL-badge {
+  background-color: #eccfff;
+  color: #694382;
+}
+.item-badge {
+  border-radius: 2px;
+  padding: 0.25em 0.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+.WS-badge {
+  background: #cdf3ff;
+  color: #37c1c6;
+}
+
+.UI-badge {
+  background: #b7d8d4;
+  color: #277964;
+}
+
+.SC-badge {
+  background: #b0dbdf;
+  color: #4cbdf1;
+}
+
+.BA-badge {
+  background: #dbc8e6;
+  color: #ac5cf7;
+}
+
+.CAN-badge {
+  background: #ffcdd2;
+  color: #c63737;
+}
+
+.REA-badge {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.UDEV-badge {
+  background: #fccf7c;
+  color: #443518;
+}

@@ -1,0 +1,315 @@
+{
+  "HEADER": {
+    "CAMPAIGN": {
+      "TITLE": {
+        "ADD_OR_UPDATE": "Ajouter Compagne",
+        "UPDATE": "Mise à jour Compagne"
+      },
+      "CAMPAIGN_CODE": "Code Compagne",
+      "STATUS": "Statut",
+      "BLOCKED": "Bloqué",
+      "ACTIVATED": "Activé",
+      "TYPE": "Type",
+      "TYPE_SIMPLE": "Test Simple",
+      "TYPE_NO_REG": "NON REG",
+      "GROUP": "Groupe ID"
+    },
+    "CAMPAIGN_ML": {
+      "LABEL": "Libellé",
+      "COMMENT": "Commentaire"
+    },
+    "SCENARIO": {
+      "AVAILABLE_SCENARIO": "scénario disponible",
+      "SELECTED_SCENARIO": "scénario selectionnés",
+      "LIST": {
+        "TITLE": "Gestion des scénario",
+        "TITELCREATE": "Ajouter un scénario",
+        "TITELUPDATE":"Modifier un scenario",
+        "DELETE": "Confirmer",
+        "DELETEPOPUP": "Vous êtes sûr ?",
+        "EMPTY": "Aucune scénario n'a été trouvée.",
+        "STATUS": {
+          "ACTIVATED": "Activé",
+          "BLOCKED": "Bloqué"
+        },
+        "TYPE": {
+          "TNR": "Non régression",
+          "TEST": "Simple"
+        },
+        "COLS": {
+          "CODE": "Code",
+          "TYPE": "Type",
+          "STATUS": "Status",
+          "LABEL": "Label",
+          "COMMENT": "Commentaire"
+        },
+        "CREATESCENARIO": {
+          "CODE": "Code",
+          "APP": "Application",
+          "VERSION": "Version",
+          "STATUS": "Statut",
+          "TYPE": "Type"
+        },
+        "SCENARIO_ML": {
+          "LABEL": "Libellé",
+          "COMMENT": "Commentaire"
+        },
+        "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées",
+        "TEST": {
+          "SELECTEDTEST": "Test selectionnés",
+          "AVAILABLETEST": "Test disponibles"
+        }
+      }
+    }
+  },
+  "CAMPAIGN": {
+    "LIST": {
+      "TITLE": "Gestion des campagnes",
+      "DELETE": "Confirmer",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "EMPTY": "Aucune campagne n'a été trouvée.",
+      "STATUS": {
+        "ACTIVATED": "Activé",
+        "BLOCKED": "Bloqué"
+      },
+      "TYPE": {
+        "TNR": "Non régression",
+        "TEST": "Simple"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire"
+      },
+      "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées"
+    }
+  },
+  "CAMPAIGNML": {
+    "LIST": {
+      "TITLE": "Gestion des campagnesMl",
+      "DELETE": "Confirmer",
+      "CANLCEL": "Annuler",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "CHANGE_TYPE": "La liste des scénarios sera vider",
+      "EMPTY": "Aucune campagne Ml n'a été trouvée.",
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire",
+        "LANGUAGE": "Langue"
+      },
+      "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées"
+    }
+  },
+  "APPVERSIONML": {
+    "LIST": {
+      "TITLE": "Gestion des applications version Multi language",
+      "DELETE": "Confirmer",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "EMPTY": "Aucune application version Ml n'a été trouvée.",
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire",
+        "LANGUAGE": "Langue"
+      },
+      "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées"
+    }
+  },
+  "APPML": {
+    "LIST": {
+      "TITLE": "Gestion des applications Multi language",
+      "DELETE": "Confirmer",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "EMPTY": "Aucune application Ml n'a été trouvée.",
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire",
+        "LANGUAGE": "Langue"
+      },
+      "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées"
+    }
+  },
+  "VERSION": {
+    "LIST": {
+      "TITLE": "Gestion des versions",
+      "DELETE": "Confirmer",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "HAS_SCENARIOS": "Cette version est rattachée à des scenarios, si vous voulez vraiment la supprimer veuillez la dissocier",
+      "EMPTY": "Aucune version trouvée",
+      "COLS": {
+        "CODE": "Code",
+        "STATUS": "Statut",
+        "HOST": "Hôte",
+        "URL": "URL",
+        "PORT": "Port",
+        "USERNAME": "Nom d'utilisateur",
+        "PASSWORD": "Mot de passe",
+        "DBHOST": "Hôte de la base de données",
+        "DBPORT": "Port de la base de données",
+        "DBUSERNAME": "Nom d'utilisateur de la base de données",
+        "DBPASSWORD": "Mot de passe de la base de données",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire",
+        "DATABASE": "Base de données"
+      },
+      "STATUS": {
+        "ENDED": "Terminé",
+        "OPERATING": "Exploitation"
+      },
+      "REPORT": "Affichage de {first} à {last} entrées de {totalRecords}"
+    }
+  },
+  "BUTTON": {
+    "CAMPAIGN": {
+      "SAVE_CAMPAIGN": "Sauvegarder",
+      "CANCEL": "Annuler"
+    }
+  },
+  "SCENARIO": {
+    "LIST": {
+      "TITLE": "Gestion des scénarios",
+      "TITLEML": "Gestion des scénarios ML",
+      "EMPTY": "Aucun scénario trouvé",
+      "DELETE": "Confirmer",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "STATUS": {
+        "ACTIVATED": "Activé",
+        "BLOCKED": "Bloqué"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "DATE": "Date",
+        "COMMENT": "Commentaire",
+        "LABEL": "Label",
+        "LANGUAGE": "Langue",
+        "CREATOR": "Créateur",
+        "REFERENCE": "Reference"
+      },
+      "TYPE": {
+        "TNR": "Non régression",
+        "TEST": "Simple"
+      },
+      "REPORT": "Affichage de {first} à {last} entrées de {totalRecords}"
+    }
+  },
+  "TEST": {
+    "LIST": {
+      "TITLE": "Gestion des tests",
+      "DELETE": "Confirmer",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "EMPTY": "Aucun test trouvé",
+      "STATUS": {
+        "UDEV": "En développement",
+        "REA": "Prêt",
+        "CAN": "Annulé"
+      },
+      "TYPE": {
+        "WS": "Service Web",
+        "UI": "Interface utilisateur",
+        "SC": "Script",
+        "BA": "Batch"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "STATUS": "Statut",
+        "APP": "Application",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire",
+        "CREATOR": "Créateur",
+        "REFERENCE": "Reference",
+        "DATE": "Date"
+      },
+      "REPORT": "Affichage de {first} à {last} entrées de {totalRecords}"
+    }
+  },
+  "APPLICATION": {
+    "LIST": {
+      "TITLE": "Gestion des application",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Vous êtes sûr ?",
+      "HAS_VERSIONS": "Cette application est rattachée à des versions, si vous voulez vraiment la supprimer veuillez la dissocier",
+      "EMPTY": "Aucune application n'a été trouvée..",
+      "STATUS": {
+        "OPERATING": "Exploitation",
+        "ENDED": "Terminé"
+      },
+
+      "COLS": {
+        "CODE": "Code",
+        "STATUS": "Status",
+        "FULLNAME": "Créé par",
+        "CREATIONDATE": "Date de creation",
+        "LABEL": "Label",
+        "COMMENT": "Comment"
+      },
+      "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées"
+    }
+  },
+  "APPLICATIONCREATE": {
+    "LIST": {
+      "TITLE": "Ajouter une application",
+      "STATUS": {
+        "OPERATING": "EXPLOITATION",
+        "ENDED": "Terminée"
+      },
+
+      "MODAL": {
+        "ADD": "Ajouter une application",
+        "UPDATE": "Modifier une application",
+        "DUPLICATE": "Dupliquer une application",
+        "CODE": "Code",
+        "STATUS": "Status",
+        "LABEL": "Label",
+        "APPPHASE": "Pahse de l'application",
+        "GROUPID": "User group",
+        "COMMENT": "Comment",
+        "SAVE": "Sauvegarder",
+        "CLOSE": "Fermer"
+      }
+    },
+    "APPLICATION": {
+      "LIST": {
+        "TITLE": "Gestion des application",
+        "DELETE": "Confirm",
+        "DELETEPOPUP": "Are you sure ?",
+        "EMPTY": "Aucune application n'a été trouvée..",
+        "STATUS": {
+          "OPERATING": "EXPLOITATION",
+          "ENDED": "TERMINÉ"
+        },
+        "COLS": {
+          "CODE": "Code",
+          "STATUS": "Status",
+          "FULLNAME": "Créé par",
+          "CREATIONDATE": "Date de creation"
+        },
+        "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées"
+      }
+    }
+  },
+  "DATATESTCASE":{
+    "COLS":{"CODE":"Code",
+    "ORDER":"Order",
+  "TEST":"Test"}
+  },
+  "ERROR": {
+    "CAMPAIGN_TEST_CODE_EXISTS": "Ce code appartien à une compagne déjà existante",
+    "CAMPAIGN_TEST_CODE_DELETED": "Ce code appartien à une compagne déjà supprimée",
+    "APPEXISTS": "Ce code appartien à une application déjà existante",
+    "APPDELETED": "Ce code appartien à une application supprimée",
+    "CAMPAIGNEXIT":"This scenario owned by a campagne",
+    "SAMECODE":"This scenario code exists",
+    "DELETED":"this code is taken by deleted scenario",
+    "SCENARIOEXIT":"this test owned by scenario"
+  }
+}

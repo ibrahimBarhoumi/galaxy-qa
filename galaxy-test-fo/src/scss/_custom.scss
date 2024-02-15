@@ -1,0 +1,17 @@
+// Here you can add other styles
+.app,
+app-container,
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.breadcrumb {
+  border-bottom:none;
+  margin-bottom:0px;
+}
+
+.main .container-fluid {
+  padding: 20px 20px;
+}

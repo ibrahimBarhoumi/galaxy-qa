@@ -1,0 +1,84 @@
+services:
+  - docker:19.03.12-dind
+
+stages:
+  - build
+  - test
+  - docker_build
+  - deploy
+
+Build maven:
+  image: maven:3.6.3-jdk-11-slim
+  stage: build
+  tags:
+    - build
+  script:
+    - mvn clean install -Dmaven.test.skip=true
+  only:
+    refs:
+      - /^GXT\-.*$/
+  artifacts:
+    paths:
+      - target/*.jar
+
+Build maven develop:
+  image: maven:3.6.3-jdk-11-slim
+  stage: build
+  tags:
+    - build
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE -Dmaven.test.skip=true
+  environment:
+    name: develop
+  only:
+    refs:
+      - develop
+  artifacts:
+    paths:
+      - target/*.jar
+
+
+Test:
+  stage: test
+  tags:
+    - build
+  script:
+    - mvn test
+
+Docker build:
+  stage: docker_build
+  tags:
+    - deploy
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  environment:
+    name: develop
+  only:
+    refs:
+      - develop
+  script:
+    - docker build --build-arg SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE -t $DOCKER_REPO .
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker push $DOCKER_REPO
+
+
+Deploy:
+  stage: deploy
+  tags:
+    - deploy
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  environment:
+    name: develop
+  only:
+    refs:
+      - develop
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker pull $DOCKER_REPO
+    - docker stop $APP_NAME || true && docker rm $APP_NAME || true
+    - docker container run -d --name $APP_NAME -p $PORT:8082  --network qa-net -e SPRING_PROFILES_ACTIVE=$SPRING_ACTIVE_PROFILE $DOCKER_REPO
+    - docker logout
+

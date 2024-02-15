@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: file-service
+  data:
+    mongodb:
+      defaultDataSource:
+        uri: mongodb://localhost:27017
+        host: localhost
+        port: 27017
+        database: fileService
+server:
+  port: 8080

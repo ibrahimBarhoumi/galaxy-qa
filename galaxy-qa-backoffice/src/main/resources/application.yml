@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: gxqa-bo
+  main:
+      allow-bean-definition-overriding: true
+  profiles:
+    active: local

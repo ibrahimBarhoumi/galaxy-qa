@@ -1,0 +1,91 @@
+<div class="modal-header">
+    <h4 class="modal-title">Execution</h4>
+    <button
+      type="button"
+      class="close"
+      (click)="bsModalRef.hide()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true"><i class="fa fa-times"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form
+      action=""
+      method="post"
+      enctype="multipart/form-data"
+      class="form-horizontal"
+      [formGroup]="executionForm"
+    >
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="text-input">{{
+        "TEST.LIST.COLS.CODE" | translate
+      }}</label>
+
+      <div class="col-md-8">
+        <input
+          type="text"
+          id="code-input"
+          name="code-input"
+          class="form-control"
+          formControlName="code"
+          disabled=true
+        />
+
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label" for="selectCode"
+        >Versions</label
+      >
+      <div class="col-md-8">
+        <ng-select
+          [items]="dataBufferVersions"
+          bindLabel="code"
+          (change)="versionChange($event)"
+          placeholder="Select version"
+          formControlName="testVersions"
+          [hideSelected]="true"
+          [multiple] = false
+        >
+          <ng-template ng-option-tmp let-item="item">
+            {{ item.code }}
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+      <div class="form-group row">
+
+        <label class="col-md-4 col-form-label" for="selectCode"
+          >DataTestCase</label
+        >
+        <div class="col-md-8">
+          <ng-select
+            [items]="dataBufferApplications"
+            bindLabel="dataTestCase.code"
+            placeholder="Select dataTestCase"
+            formControlName="application"
+            (change)="DataTestCaseChange($event)"
+          >
+            <ng-template ng-option-tmp let-item="item">
+              {{ item.dataTestCase.code }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onSubmitTest(executionForm);bsModalRef.hide()"
+      [disabled]="executionForm.invalid"
+    >
+      Play
+    </button>
+  </div>

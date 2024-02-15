@@ -1,0 +1,326 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>{{ "HEADER.CAMPAIGN.TITLE.ADD_OR_UPDATE" | translate }}</strong>
+      </div>
+      <div class="card-body">
+        <form
+          action=""
+          method="post"
+          enctype="multipart/form-data"
+          class="form-horizontal"
+          [formGroup]="campaignForm"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <mat-card gdArea="campaign" class="w-230 h-230">
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="codeCampaign">{{
+                      "HEADER.CAMPAIGN.CAMPAIGN_CODE" | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        id="codeCampaign"
+                        name="text-input"
+                        class="form-control"
+                        formControlName="code"
+                        placeholder="{{
+                          'HEADER.CAMPAIGN.CAMPAIGN_CODE' | translate
+                        }}"
+                      />
+
+                      <mat-error *ngIf="deleted">
+                    {{"ERROR.CAMPAIGN_TEST_CODE_DELETED"|translate}}</mat-error
+                      >
+                      <mat-error *ngIf="exist"
+                        >{{"ERROR.CAMPAIGN_TEST_CODE_EXISTS"|translate}}</mat-error
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label">{{
+                      "HEADER.CAMPAIGN.STATUS" | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <div>
+                        <mat-slide-toggle
+                          class="mat-primary"
+                          [(ngModel)]="isActivated"
+                          [ngModelOptions]="{ standalone: true }"
+                          aria-label="Activated"
+                          labelPosition="before"
+                          ><span class="BLOCKED-badge">{{
+                            "HEADER.CAMPAIGN.BLOCKED" | translate
+                          }}</span>
+                        </mat-slide-toggle>
+                        <span class="ACTIVATED-badge">{{
+                          "HEADER.CAMPAIGN.ACTIVATED" | translate
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label">{{
+                      "HEADER.CAMPAIGN.TYPE" | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <div>
+                        <mat-slide-toggle
+                          class="mat-primary"
+                          [(ngModel)]="isSimpleTest"
+                          [ngModelOptions]="{ standalone: true }"
+                          aria-label="isSimple"
+                          labelPosition="before"
+                          [popover]="popChangeType"
+                          [disablePopover]="disablePopover"
+                          #pop="bs-popover"
+                          popoverTitle="{{
+                            'CAMPAIGNML.LIST.CHANGE_TYPE' | translate
+                          }}"
+                        >
+                          <span class="TNR-badge">{{
+                            "HEADER.CAMPAIGN.TYPE_NO_REG" | translate
+                          }}</span>
+                        </mat-slide-toggle>
+                        <span class="TEST-badge">{{
+                          "HEADER.CAMPAIGN.TYPE_SIMPLE" | translate
+                        }}</span>
+                      </div>
+                    </div>
+                    <ng-template
+                    #popChangeType>
+                      <button
+                        type="button"
+                        class="btn  btn-col-6 btn-danger"
+                        (click)="toggleChange(); selectedScenario=[];getAllScenarios();disablePopover = false; pop.hide()"
+                      >
+                        {{ "CAMPAIGN.LIST.DELETE" | translate }}
+                      </button>
+                      <button
+                      type="button"
+                      class="btn  btn-col-6 btn-secondary"
+                      (click)="pop.hide();isSimpleTest = !isSimpleTest"
+                    >
+                      {{ "BUTTON.CAMPAIGN.CANCEL" | translate }}
+                    </button>
+                    </ng-template>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+            <!--/.col-->
+            <div class="col-md-6">
+              <div class="card">
+                <mat-card gdArea="configML" class="w-230 h-230">
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="groupId">{{
+                      "HEADER.CAMPAIGN.GROUP" | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <mat-select id="groupId"> </mat-select>
+                    </div>
+                  </div>
+                  <div class="form-group row" formArrayName="configurationMLS">
+                    <label class="col-md-3 col-form-label" for="labelML">{{
+                      "HEADER.CAMPAIGN_ML.LABEL" | translate
+                    }}</label>
+                    <div class="col-md-9" [formGroupName]="0">
+                      <input
+                        type="text"
+                        id="labelML"
+                        name="text-input"
+                        class="form-control"
+                        formControlName="label"
+                        placeholder="{{
+                          'HEADER.CAMPAIGN_ML.LABEL' | translate
+                        }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row" formArrayName="configurationMLS">
+                    <label class="col-md-3 col-form-label" for="commentML">{{
+                      "HEADER.CAMPAIGN_ML.COMMENT" | translate
+                    }}</label>
+                    <div class="col-md-9" [formGroupName]="0">
+                      <input
+                        type="text"
+                        id="commentML"
+                        name="text-input"
+                        class="form-control"
+                        formControlName="comment"
+                        placeholder="{{
+                          'HEADER.CAMPAIGN_ML.COMMENT' | translate
+                        }}"
+                      />
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+          <br />
+          <mat-card gdArea="scenario" class="w-230 h-230">
+            <div class="row">
+              <div class="col-sm-6">
+                <p-panel>
+                  <p-header>
+                    <div class="ui-helper-clearfix">
+                      <span
+                        class="ui-panel-title"
+                        style="
+                          font-size: 16px;
+                          display: inline-block;
+                          margin-top: 2px;
+                        "
+                        >{{
+                          "HEADER.SCENARIO.AVAILABLE_SCENARIO" | translate
+                        }}</span
+                      >
+                      <div
+                        class="form-group has-feedback pull-right"
+                        style="
+                          width: 50%;
+                          margin-top: -50px;
+                          margin-bottom: 0px;
+                          margin-left: 90%;
+                        "
+                      >
+                        <mat-form-field
+                          class="filter w-100-p"
+                          floatLabel="never"
+                        >
+                          <input matInput formControlName="filterScenario" />
+                          <button
+                            type="button"
+                            mat-icon-button
+                            matSuffix
+                            class="disabled-text"
+                            color="primary"
+                            (click)="searchScenarios()"
+                          >
+                            <mat-icon matSuffix class="disabled-text">
+                              search
+                            </mat-icon>
+                          </button>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </p-header>
+                  <div
+                    cdkDropList
+                    #todoList="cdkDropList"
+                    [cdkDropListData]="scenarioList"
+                    [cdkDropListConnectedTo]="[doneList]"
+                    class="drag-list"
+                    (cdkDropListDropped)="drop($event)"
+                  >
+                    <div
+                      class="drag-box"
+                      *ngFor="let item of scenarioList"
+                      cdkDrag
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-outline-success btn-lg btn-block"
+                      >
+                        <i class="pull-left"></i>{{ item.code }}
+                      </button>
+                    </div>
+                  </div>
+                </p-panel>
+              </div>
+              <div class="col-sm-6">
+                <p-panel>
+                  <p-header>
+                    <div class="ui-helper-clearfix">
+                      <span
+                        class="ui-panel-title"
+                        style="
+                          font-size: 16px;
+                          display: inline-block;
+                          margin-top: 2px;
+                        "
+                        >{{
+                          "HEADER.SCENARIO.SELECTED_SCENARIO" | translate
+                        }}</span
+                      >
+                      <div
+                        class="form-group has-feedback pull-right"
+                        style="
+                          width: 50%;
+                          margin-top: -10px;
+                          margin-bottom: 0px;
+                        "
+                      >
+                        <mat-form-field
+                          class="filter w-100-p"
+                          floatLabel="never"
+                        >
+                          <input matInput />
+                          <button
+                            type="button"
+                            mat-icon-button
+                            matSuffix
+                            class="disabled-text"
+                            color="primary"
+                            (click)="searchScenarios()"
+                          >
+                            <mat-icon matSuffix class="disabled-text">
+                              search
+                            </mat-icon>
+                          </button>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </p-header>
+                  <div
+                    cdkDropList
+                    #doneList="cdkDropList"
+                    [cdkDropListData]="selectedScenario"
+                    [cdkDropListConnectedTo]="[todoList]"
+                    class="drag-list"
+                    (cdkDropListDropped)="drop($event)"
+                  >
+                    <div
+                      class="drag-box"
+                      *ngFor="let item of selectedScenario"
+                      cdkDrag
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary btn-lg btn-block"
+                      >
+                        <i class="pull-left"></i>{{ item.code }}
+                      </button>
+                    </div>
+                  </div>
+                </p-panel>
+              </div>
+            </div>
+          </mat-card>
+          <br />
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="onCancel()"
+            >
+              {{ "BUTTON.CAMPAIGN.CANCEL" | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="onSubmit(campaignForm)"
+              [disabled]="campaignForm.invalid"
+            >
+              {{ "BUTTON.CAMPAIGN.SAVE_CAMPAIGN" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

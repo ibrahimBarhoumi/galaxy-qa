@@ -1,0 +1,9 @@
+:host ::ng-deep {
+  .ng-dropdown-panel .ng-dropdown-panel-items {
+    max-height: 110px;
+  }
+
+  .flag-icon-en {
+    background-image: url(/us.svg);
+}
+}

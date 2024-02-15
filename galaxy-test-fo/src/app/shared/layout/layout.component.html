@@ -1,0 +1,43 @@
+<app-header
+  [navbarBrandRouterLink]="['/']"
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 145, height: 45}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo-min.svg', width: 45, height: 45}"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]=false
+  [mobileAsideMenuToggler]=false>
+  <ul class="nav navbar-nav d-md-down-none">
+    <cui-breadcrumb></cui-breadcrumb>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item d-md-down-none">
+      <a class="nav-link" href="javascript:void(0);"><i class="fa fa-bell"></i><span class="badge badge-pill badge-danger">3</span></a>
+    </li>
+    <li class="nav-item d-md-down-none dropdown" dropdown placement="bottom right">
+      <a class="nav-link" href="javascript:void(0);" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false"><i [class]="'flag-icon h4 mb-0 '+selectLanguage?.class "></i></a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+      <a *ngFor="let item of listLangs" class="dropdown-item"  (click)="changeLanguage(item)" ><i [class]="'flag-icon h4 mb-0 '+item.class"></i> {{item.text}} </a>
+    </div>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+        <img src="assets/img/avatars/1.jpg" class="img-avatar" />
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <a class="dropdown-item" href="javascript:void(0);" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
+      </div>
+    </li>
+  </ul>
+</app-header>
+<div class="app-body">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] ></app-sidebar-nav>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+</div>

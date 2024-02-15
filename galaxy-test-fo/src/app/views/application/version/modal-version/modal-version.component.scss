@@ -1,0 +1,28 @@
+:host ::ng-deep {
+  .ng-dropdown-panel .ng-dropdown-panel-items {
+    max-height: 110px;
+  }
+
+  .flag-icon-en {
+    background-image: url(/us.svg);
+  }
+}
+
+.OPERATING-badge {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.ENDED-badge {
+  background: #ffcdd2;
+  color: #c63737;
+}
+
+.item-badge {
+  border-radius: 2px;
+  padding: 0.25em 0.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}

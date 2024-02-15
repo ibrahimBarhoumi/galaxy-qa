@@ -1,0 +1,301 @@
+{
+  "HEADER": {
+    "CAMPAIGN": {
+      "TITLE": {
+        "ADD_OR_UPDATE": "Add Campaign",
+        "UPDATE": "Update Campaign"
+      },
+      "CAMPAIGN_CODE": "Campaign Code",
+      "STATUS": "Status",
+      "BLOCKED": "Blocked",
+      "ACTIVATED": "Activated",
+      "TYPE": "TYPE",
+      "TYPE_SIMPLE": "Simple Test",
+      "TYPE_NO_REG": "NO REG",
+      "GROUP": "Group ID"
+    },
+    "CAMPAIGN_ML": {
+      "LABEL": "Label",
+      "COMMENT": "Comment"
+    },
+    "SCENARIO": {
+      "AVAILABLE_SCENARIO": "Available Scenario",
+      "SELECTED_SCENARIO": "Selected Scenario",
+      "CHANGETYPE":"Are you sur to change type",
+      "LIST": {
+        "TITLE": "Scenario Managment",
+        "TITELCREATE":"Add scenario",
+        "TITELUPDATE":"Edit scenario",
+        "DELETE": "Confirm",
+        "DELETEPOPUP": "Are you sureee ?",
+        "EMPTY": "No scenario was found.",
+        "STATUS": {
+          "ACTIVATED": "Activé",
+          "BLOCKED": "Bloqué"
+        },
+        "TYPE": {
+          "TNR": "Non régression",
+          "TEST": "Simple"
+        },
+        "COLS": {
+          "CODE": "Code",
+          "TYPE": "Type",
+          "STATUS": "Status",
+          "LABEL": "Label",
+          "COMMENT": "Commentaire"
+        },
+        "CREATESCENARIO": {
+          "CODE": "Code",
+          "APP": "Application",
+          "VERSION": "Version",
+          "STATUS": "Status",
+          "TYPE": "Type"
+        },
+        "SCENARIO_ML": {
+          "LABEL": "Label",
+          "COMMENT": "Comment"
+        },
+        "REPORT": "Affichage de {first} à {last} de {totalRecords} entrées",
+        "TEST": {
+          "SELECTEDTEST": "Selected Test",
+          "AVAILABLETEST": "Available Test"
+        }
+      }
+    }
+  },
+  "CAMPAIGN": {
+    "LIST": {
+      "TITLE": "Campaign management",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "EMPTY": "No campaigns found.",
+      "STATUS": {
+        "ACTIVATED": "Activated",
+        "BLOCKED": "Blocked"
+      },
+      "TYPE": {
+        "TNR": "No regression",
+        "TEST": "Simple"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "LABEL": "Label",
+        "COMMENT": "Comment"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "CAMPAIGNML": {
+    "LIST": {
+      "TITLE": "CampaignMl management",
+      "DELETE": "Confirm",
+      "CANLCEL": "Cancel",
+      "DELETEPOPUP": "Are you sure ?",
+      "CHANGE_TYPE": "Scenario list xill be empty",
+      "EMPTY": "No campaignsMl found.",
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Comment",
+        "LANGUAGE": "Language"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "APPVERSIONML": {
+    "LIST": {
+      "TITLE": "Application version multi language management",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "EMPTY": "No application version ML found.",
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Comment",
+        "LANGUAGE": "Language"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "APPML": {
+    "LIST": {
+      "TITLE": "Application multi language management",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "EMPTY": "No application ML found.",
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Comment",
+        "LANGUAGE": "Language"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "VERSION": {
+    "LIST": {
+      "TITLE": "Version management",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "HAS_SCENARIOS": "This version is linked to scenarios, if you really want to delete it please unlink it",
+      "EMPTY": "No versions found.",
+      "COLS": {
+        "CODE": "Code",
+        "STATUS": "Status",
+        "HOST": "Host",
+        "URL": "URL",
+        "PORT": "Port",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "DBHOST": "Database host",
+        "DBPORT": "Database port",
+        "DBUSERNAME": "Database username",
+        "DBPASSWORD": "Database password",
+        "LABEL": "Label",
+        "COMMENT": "Comment",
+        "DATABASE": "Database"
+      },
+      "STATUS": {
+        "ENDED": "Ended",
+        "OPERATING": "Operating"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "BUTTON": {
+    "CAMPAIGN": {
+      "SAVE_CAMPAIGN": "Save",
+      "CANCEL": "Cancel"
+    }
+  },
+  "SCENARIO": {
+    "LIST": {
+      "TITLE": "Scenario Managment",
+      "TITLEML": "Scenario Ml Managment",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "STATUS": {
+        "ACTIVATED": "Activated",
+        "BLOCKED": "Bloked"
+      },
+      "TYPE": {
+        "TNR": "No regression",
+        "TEST": "Simple"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "STATUS": "Status",
+        "TYPE": "Type",
+        "LABEL": "Label",
+        "COMMENT": "Commentaire",
+        "LANGUAGE": "Language",
+        "CREATOR": "Creator",
+        "REFERENCE": "Reference"
+      },
+      "REPORT": "Affichage de {first} à {last} entrées de {totalRecords}"
+
+    }
+  },
+  "TEST": {
+    "LIST": {
+      "TITLE": "Test management",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "EMPTY": "No test found.",
+      "STATUS": {
+        "UDEV": "Under development",
+        "REA": "Ready",
+        "CAN": "Canceled"
+      },
+      "TYPE": {
+        "WS": "Web Service",
+        "UI": "User Interface",
+        "SC": "Script",
+        "BA": "Batch"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "STATUS": "Statut",
+        "APP": "Application",
+        "LABEL": "Label",
+        "COMMENT": "Comment",
+        "CREATOR": "Creator",
+        "REFERENCE": "Reference",
+        "DATE": "Date"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "APPLICATION": {
+    "LIST": {
+      "TITLE": "Application management",
+      "DELETE": "Confirm",
+      "DELETEPOPUP": "Are you sure ?",
+      "HAS_VERSIONS": "This app is versioned, if you really want to remove it please unlink it",
+      "EMPTY": "No application found.",
+      "STATUS": {
+        "OPERATING": "OPERATING",
+        "ENDED": "ENDED"
+      },
+      "TYPE": {
+        "TNR": "No regression",
+        "TEST": "Simple"
+      },
+      "COLS": {
+        "CODE": "Code",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "FULLNAME": "Created By",
+        "CREATIONDATE": "Creation date",
+        "LABEL": "Label",
+        "COMMENT": "Comment"
+      },
+      "REPORT": "Showing {first} to {last} of {totalRecords} entries"
+    }
+  },
+  "APPLICATIONCREATE": {
+    "LIST": {
+      "TITLE": "Add New application",
+      "STATUS": {
+        "OPERATING": "OPERATING",
+        "ENDED": "ENDED"
+      },
+
+      "MODAL": {
+        "ADD": "Add application",
+        "UPDATE": "Edit application",
+        "DUPLICATE": "Duplicate application",
+        "CODE": "Code",
+        "STATUS": "Status",
+        "LABEL": "Label",
+        "APPPHASE": "Application Phase",
+        "GROUPID": "User group",
+        "COMMENT": "Comment",
+        "SAVE": "Save",
+        "CLOSE": "Close"
+      }
+    }
+  },
+  "DATATESTCASE":{
+    "COLS":{"CODE":"Code",
+    "ORDER":"Order",
+  "TEST":"Test"}
+  },
+  "ERROR":{
+    "CAMPAIGN_TEST_CODE_EXISTS":"This campaign code exists",
+    "CAMPAIGN_TEST_CODE_DELETED":"This code is taken by deleted campaign",
+    "APPEXISTS":"This application code exist",
+    "APPDELETED":"This code is taken by deleted application",
+    "CAMPAIGNEXIT":"This scenario owned by a campagne",
+    "SAMECODE":"This scenario code exists",
+    "DELETED":"this code is taken by deleted scenario",
+    "SCENARIOEXIT":"this test owned by scenario"
+
+  }
+}

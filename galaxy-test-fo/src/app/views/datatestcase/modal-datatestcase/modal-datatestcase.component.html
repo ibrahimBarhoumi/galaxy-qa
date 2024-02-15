@@ -1,0 +1,183 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ copy?.id ? "Edit" : "Add" }} Datatescase</h4>
+    <button
+      type="button"
+      class="close"
+      (click)="bsModalRef.hide()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true"><i class="fa fa-times"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form
+      action=""
+      method="post"
+      enctype="multipart/form-data"
+      class="form-horizontal"
+      [formGroup]="dataTestCaseForm"
+    >
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label" for="selectCode"
+          >Test</label>
+        <div class="col-md-8">
+          <ng-select
+            [items]="dataBufferTests"
+            [virtualScroll]="true"
+            [loading]="loadingTests"
+            bindLabel="code"
+            placeholder="Select test"
+            (scroll)="loadTests($event)"
+            formControlName="test"
+            [hideSelected]="true"
+            [typeahead]="searchTestInput"
+            (change)="changeTest($event)"
+          >
+            <ng-template ng-option-tmp let-item="item">
+              {{ item.code }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label" for="selectCode"
+          >Versions</label
+        >
+        <div class="col-md-8">
+          <ng-select
+            [items]="dataBufferVersions"
+            [virtualScroll]="true"
+            bindLabel="applicationVersion.code"
+            placeholder="Select version"
+            formControlName="applicationVersionList"
+            [hideSelected]="true"
+            [typeahead]="searchVersionInput"
+            [readonly]="!dataTestCaseForm.value.test"
+            [multiple] = true
+          >
+            <ng-template ng-option-tmp let-item="item">
+              {{ item.applicationVersion.code }}
+            </ng-template>
+          </ng-select>
+          <span
+          style="color: red"
+          *ngIf="dataTestCaseForm.controls['applicationVersionList'].errors?.error"
+          >Error: {{ dataTestCaseForm.controls["testVersions"].errors?.error }} <br
+        /></span>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label" for="text-input">{{
+          "DATATESTCASE.COLS.ORDER" | translate
+        }}</label>
+
+        <div class="col-md-8">
+          <input
+            type="number"
+            id="order-input"
+            name="code-input"
+            class="form-control"
+            formControlName="order"
+          />
+          <span
+            style="color: red"
+            *ngIf="dataTestCaseForm.controls['order'].errors?.error"
+            >Error: {{ dataTestCaseForm.controls["order"].errors?.error }} <br
+          /></span>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label" for="text-input">{{
+          "DATATESTCASE.COLS.CODE" | translate
+        }}</label>
+
+        <div class="col-md-8">
+          <input
+            type="text"
+            id="code-input"
+            name="code-input"
+            class="form-control"
+            formControlName="code"
+          />
+          <span
+            style="color: red"
+            *ngIf="dataTestCaseForm.controls['code'].errors?.error"
+            >Error: {{ dataTestCaseForm.controls["code"].errors?.error }} <br
+          /></span>
+        </div>
+      </div>
+
+      <div formArrayName="values">
+        <div *ngFor="let data1 of formData().controls; let i=index;">
+          <div [formGroupName]="i">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label" for="label">Label</label>
+              <div class="col-md-8">
+              <input type="text" formControlName="label" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label" for="value">Value</label>
+              <div class="col-md-8">
+              <input type="text" formControlName="value" class="form-control">
+            </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+
+      <div class="form-group row">
+      <div class="col-md-4 col-form-label" style="height: 21px">
+        <button
+          type="button"
+          class="btn btn-block btn-outline-success"
+          style="margin-top: -7px"
+          (click)="addField()"
+        >
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-4 col-form-label" for="text-input">
+        <button (click)="onUpload()"
+        class="btn btn-success">
+        Upload
+       </button>
+
+        </div>
+
+      <div class="col-md-8">
+        <input
+        class="form-control" type="file" formControlName="fileInfo"
+        (change)="onChangeFile($event)"
+        />
+      </div>
+    </div>
+
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onSubmitDataTestCase(dataTestCaseForm)"
+
+    >
+      Save
+    </button>
+  </div>

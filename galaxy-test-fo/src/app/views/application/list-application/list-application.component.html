@@ -1,0 +1,249 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      {{ "APPLICATION.LIST.TITLE" | translate }}
+      <div class="card-header-actions" style="height: 21px">
+        <button
+          type="button"
+          class="btn btn-block btn-outline-success"
+          style="margin-top: -7px"
+          (click)="openModalWithComponent()"
+        >
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p-table
+        #dataTable
+        [value]="data?.content"
+        dataKey="id"
+        styleClass="p-datatable-responsive"
+        [rows]="data?.itemsPerPage"
+        [paginator]="true"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [pageLinks]="data?.totalPages"
+        [totalRecords]="data?.totalItems"
+        stateStorage="local"
+        stateKey="stateApplicationDataTable"
+        [lazy]="true"
+        (onLazyLoad)="list($event)"
+        [loading]="!data"
+        [columns]="cols"
+        [currentPageReportTemplate]="'APPLICATION.LIST.REPORT'| translate"
+        [showCurrentPageReport]="true"
+        [rowHover]="true"
+        rowExpandMode="single"
+      >
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th style="width: 3rem"></th>
+            <th *ngFor="let col of columns">
+
+              {{ col.header | translate}}
+              <input
+              *ngIf="col.style != 'badge'"
+                pInputText
+                type="{{col.type== 'date'? 'date' :'text' }}"
+                (input)="dataTable.filter($event.target.value, col.field)"
+                [value]="dataTable.filters[col.field]?.value"
+                [placeholder]="'Search by ' + col.field"
+                class="p-column-filter form-control form-control-sm"
+              />
+              <ng-select
+              *ngIf="col.style == 'badge'"
+              appearance="outline"
+              labelForId="selectStatus"
+              [value]="dataTable.filters[col.field]?.value"
+              (change)="dataTable.filter(applicationStatus, col.field)"
+
+              [(ngModel)]="applicationStatus"
+              (clear) = "clearSelect()"
+
+            >
+              <ng-option  value="OPERATING"
+              >
+              <span
+
+              class="OPERATING-badge"
+            > {{ 'APPLICATION.LIST.STATUS.OPERATING'| translate }}</span>
+
+              </ng-option>
+              <ng-option  value="ENDED"
+              >
+              <span
+              class="ENDED-badge"
+            > {{ 'APPLICATION.LIST.STATUS.ENDED'| translate }}</span>
+
+              </ng-option>
+            </ng-select>
+            </th>
+            <th>
+              <div class="row mt-3">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-warning"
+                    (click)="
+                      dataTable.filters = {}; dataTable.clearState(); list() ;applicationStatus= []
+                    "
+                  >
+                    <i class="fa fa-filter"></i>
+                  </button>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-application let-expanded="expanded" let-columns="columns" let-i = "dataIndex" >
+          <tr [pSelectableRow]="application">
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [pRowToggler]="application"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="
+                  expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-right'
+                "
+                (click) = " getVersions(application.id)"
+              ></button>
+            </td>
+            <td *ngFor="let col of columns">
+              <span
+                *ngIf="col.style == 'badge' else notBadge"
+                [class]="application[col.field] + '-badge item-badge'"
+              >{{ (ApplicationStatusLabel[application[col.field]]  | translate) }}</span>
+              <ng-template #notBadge  >
+              {{
+                col.type == 'date' ? (application[col.field] | date:'yyyy-MM-dd' ):  col.hasUser? (application.createdBy.user[col.field] ) : col.hasConfiguration? selectConfiguration(application.configurationMLS)[col.field]: (application[col.field] )
+
+              }}
+            </ng-template>
+            </td>
+            <td>
+              <div class="row mt-3">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-info"
+                    (click)="
+                    openModalWithComponent(application)
+                  ">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </div>
+
+                <div class="col-6 col-sm-4 col-md-4 col-xl mb-4 mb-xl-0">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-primary"
+                    (click)="
+                    openModalWithComponent(application, duplicateMode)
+                  "
+                  >
+                    <i class="fa fa-copy"></i>
+                  </button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <ng-template #popDelete>
+                    <button
+                      type="button"
+                      class="btn btn-block btn-sm btn-danger"
+                      (click)="delete(application.id);pop.hide()"
+                    >
+                      {{ "APPLICATION.LIST.DELETE" | translate }}
+                    </button>
+                  </ng-template>
+                  <button
+                    type="button"
+                    class="btn btn-block btn-sm btn-outline-danger"
+                    [popover]="popDelete"
+                    popoverTitle="{{'APPLICATION.LIST.DELETEPOPUP'|translate}}"
+                    #pop="bs-popover"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+                <mat-error *ngIf="hasVersions[application.id]">{{'APPLICATION.LIST.HAS_VERSIONS'|translate}}</mat-error>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td  [attr.colspan]="cols.length + 1" >{{ "APPLICATION.LIST.EMPTY" | translate }}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-application>
+          <tr>
+            <td colspan="7">
+              <div class="p-p-3">
+                <p-table [value]="versions" dataKey="id">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="test" style="width: 3rem"></th>
+                      <th class="test">
+                        {{ "TEST.LIST.COLS.CODE" | translate }} <p-sortIcon field="code"></p-sortIcon>
+                      </th>
+                      <th class="test">
+                        {{ "TEST.LIST.COLS.STATUS" | translate }}
+                      </th>
+                      <th class="test">
+                        {{  'APPLICATION.LIST.COLS.COMMENT' | translate }}
+
+                      </th>
+                      <th class="test">
+                        {{  'APPLICATION.LIST.COLS.LABEL' | translate }} <p-sortIcon field="amount"></p-sortIcon>
+                      </th>
+
+                    </tr>
+                  </ng-template>
+                  <ng-template
+                    pTemplate="body"
+                    let-version
+                  >
+                    <tr>
+
+                      <td></td>
+                      <td>{{ version.code }}</td>
+                      <td>
+                        <span
+                          [class]="
+                          version.status +
+                            '-badge item-badge'
+                          "
+                          >{{
+                            ApplicationStatusLabel[version.status] | translate
+                          }}</span
+                        >
+                      </td>
+                      <td>{{ selectConfiguration(version.configurationMLS).comment }}</td>
+                      <td>{{ selectConfiguration(version.configurationMLS).label}}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="6">
+                        There are no test for this product yet.
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="6">
+                        {{ "CAMPAIGN.LIST.EMPTY" | translate }}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </td>
+          </tr></ng-template
+        >
+      </p-table>
+    </div>
+  </div>
+</div>

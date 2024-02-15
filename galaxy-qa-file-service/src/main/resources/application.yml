@@ -1,0 +1,40 @@
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  application:
+    name: file-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: ["health", "info"]
+    enabled-by-default: false
+  endpoint:
+    health:
+      show-details: when_authorized
+      enabled: true
+    info:
+      enabled: true
+    jhimetrics:
+      enabled: false
+
+#security:
+#  basic:
+#    enabled: true
+#  oauth2:
+#    client:
+#      clientId: PlatanaOauth
+#      clientSecret: PlatanaOauthSecret
+#      accessTokenUri: http://oauth.platana.fr/auth/oauth/token
+#      userAuthorizationUri: http://oauth.platana.fr/auth/oauth/authorize
+#    resource:
+#      token-info-uri: http://oauth.platana.fr/auth/oauth/check_token
+#      filter-order: 3

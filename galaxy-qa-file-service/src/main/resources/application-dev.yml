@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: file-service
+  data:
+    mongodb:
+      defaultDataSource:
+        uri: mongodb://root:Mongo2351#$%40@MongoDB
+        database: fileService
+server:
+  port: 8081
+internal:
+  file:
+    endpoint:
+      url: http://localhost:8081/api
+
